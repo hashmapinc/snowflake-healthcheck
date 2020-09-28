@@ -38,7 +38,7 @@ jobs:
           name: Deploy Lambda Function and Layers to AWS Console
           command: |
             cd healthcheck && sls package
-            sls deploy
+            sls deploy --package .serverless
 
 workflows:
   build_and_deploy:
