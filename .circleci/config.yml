@@ -6,7 +6,6 @@ jobs:
       - image: cimg/node:14.11.0
     environment:
       AWS_PROVIDER: aws
-      MAKE_LAYER_PATH: healthcheck/layers
 
     working_directory: ~/Snowflake-healthcheck
 
@@ -32,8 +31,7 @@ jobs:
       - run:
           name: Update and Make Dependency Layer 
           command: |
-            cd $Make_Layer_Path && chmod +x get_layer_packages.sh && ./get_layer_packages.sh
-            cd -
+            pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
       - run:
           name: Deploy Lambda Function and Layers to AWS Console
           command: |
