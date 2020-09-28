@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
 
-      # - setup_remote_docker:
-      #     version: 19.03.12
+      - setup_remote_docker:
+          version: 19.03.12
 
       - restore_cache:
           keys:
@@ -35,6 +35,7 @@ jobs:
           name: Update and Make Dependency Layer 
           command: |
             pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
+            
       - run:
           name: Deploy Lambda Function and Layers to AWS Console
           command: |

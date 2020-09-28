@@ -17,3 +17,9 @@ functions:
     layers:
       - {Ref: DependenciesLambdaLayer}
 
+# plugins:
+#   - serverless-python-requirements
+
+# custom:
+#   pythonRequirements:
+#     dockerizePip: non-linux
