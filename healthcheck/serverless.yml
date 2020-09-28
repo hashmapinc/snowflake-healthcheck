@@ -5,21 +5,14 @@ provider:
   region: us-east-1
   runtime: python3.7
 
-# layers:
-#   Dependencies:
-#     path: layers
-#     compatibleRuntimes:
-#       - python3.7
+layers:
+  Dependencies:
+    path: layers
+    compatibleRuntimes:
+      - python3.7
 
 functions:
   connection:
     handler: handler.handler
-    # layers:
-    #   - {Ref: DependenciesLambdaLayer}
-
-plugins:
-  - serverless-python-requirements
-
-custom:
-  pythonRequirements:
-    dockerizePip: non-linux
+    layers:
+      - {Ref: DependenciesLambdaLayer}
