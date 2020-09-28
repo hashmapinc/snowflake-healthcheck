@@ -34,6 +34,7 @@ jobs:
       - run:
           name: Update and Make Dependency Layer 
           command: |
+            pwd
             pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
             
       - run:
