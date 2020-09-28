@@ -6,7 +6,7 @@ jobs:
       - image: cimg/node:14.11.0
     environment:
       AWS_PROVIDER: aws
-      MAKE_LAYER_PATH: layers
+      MAKE_LAYER_PATH: healthcheck/layers
 
     working_directory: ~/Snowflake-healthcheck
 
