@@ -13,8 +13,8 @@ jobs:
       - checkout
 
       - setup_remote_docker:
-        version: 19.03.12
-        
+          version: 19.03.12
+
       - restore_cache:
           keys:
           - v1-dependencies
