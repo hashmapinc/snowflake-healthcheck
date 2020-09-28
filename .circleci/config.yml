@@ -32,9 +32,9 @@ jobs:
       - run:
           name: Update and Make Dependency Layer 
           command: |
-            pushd $Make_Layer_Path && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
-            sls package
+            cd $Make_Layer_Path && chmod +x get_layer_packages.sh && ./get_layer_packages.sh
             cd -
+            sls package
       - run:
           name: Deploy Lambda Function and Layers to AWS Console
           command: |
