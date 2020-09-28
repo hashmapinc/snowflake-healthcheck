@@ -1,0 +1,22 @@
+{
+  "name": "snowflake-healthcheck",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hashmapinc/snowflake-healthcheck.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hashmapinc/snowflake-healthcheck/issues"
+  },
+  "homepage": "https://github.com/hashmapinc/snowflake-healthcheck#readme",
+  "dependencies": {
+    "serverless": "^2.3.0"
+  }
+}

@@ -1,0 +1,19 @@
+service: healthcheck
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: python3.7
+
+layers:
+  Dependencies:
+    path: layers
+    compatibleRuntimes:
+      - python3.7
+
+functions:
+  connection:
+    handler: handler.handler
+    layers:
+      - {Ref: DependenciesLambdaLayer}
+

@@ -1,0 +1,48 @@
+version: 2.1
+
+jobs:
+  deploy_lambda:
+    docker: 
+      - image: cimg/node:14.11.0
+    environment:
+      AWS_PROVIDER: aws
+      MAKE_LAYER_PATH: healthcheck/Layers
+
+    working_directory: ~/Snowflake-healthcheck
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies
+          #fallback to using the latest cache if no exact match is found
+          - v1-dependencies
+      - run:
+          name: Install Dependencies and Connect to AWS
+          command: |
+            sudo npm i -g serverless
+            npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies
+
+      - run:
+          name: Update and Make Dependency Layer 
+          command: |
+            cd $Make_Layer_Path && chmod +x get_layer_packages.sh && ./get_layer_packages.sh
+            cd -
+      - run:
+          name: Deploy Lambda Function and Layers to AWS Console
+          command: |
+            cd healthcheck && sls deploy
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - deploy_lambda
+          # filters:
+          #   branches:
+          #     only: master
