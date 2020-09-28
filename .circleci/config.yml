@@ -25,18 +25,17 @@ jobs:
           command: |
             sudo npm i -g serverless
             npm install
-            npm install --save serverless-python-requirements
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies
 
-      # - run:
-      #     name: Update and Make Dependency Layer 
-      #     command: |
-      #       pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
-
+      - run:
+          name: Update and Make Dependency Layer 
+          command: |
+            pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
+            
       - run:
           name: Deploy Lambda Function and Layers to AWS Console
           command: |
