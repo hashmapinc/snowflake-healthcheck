@@ -118,10 +118,5 @@ def handler(event):
         return json.dumps(resp)
 
 
-
-jsondata = {
-    
-}
-
 result = handler(jsondata)
 print(result)
