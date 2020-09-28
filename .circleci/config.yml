@@ -12,8 +12,8 @@ jobs:
     steps:
       - checkout
 
-      - setup_remote_docker:
-          version: 19.03.12
+      # - setup_remote_docker:
+      #     version: 19.03.12
 
       - restore_cache:
           keys:
