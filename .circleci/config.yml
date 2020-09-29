@@ -18,8 +18,7 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies
-          #fallback to using the latest cache if no exact match is found
-          - v1-dependencies
+
       - run:
           name: Install Dependencies and Connect to AWS
           command: |
@@ -34,10 +33,6 @@ jobs:
       - run:
           name: Update and Make Dependency Layer 
           command: |
-            cd healthcheck/layers
-            pwd
-            ls
-            cd -
             pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
             
       - run:

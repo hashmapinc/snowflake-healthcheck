@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hashmapinc/snowflake-healthcheck#readme",
   "dependencies": {
-    "serverless": "^2.3.0"
+    "serverless": "^2.3.0",
+    "serverless-python-requirements": "^5.1.0"
   }
 }

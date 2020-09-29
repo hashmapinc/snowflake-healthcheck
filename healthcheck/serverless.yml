@@ -15,4 +15,15 @@ functions:
   connection:
     handler: handler.handler
     layers:
-      - {Ref: DependenciesLambdaLayer}
+      # - {Ref: PythonRequirementsLambdaLayer}
+        - {Ref: DependenciesLambdaLayer}
+
+# plugins:
+#   - serverless-python-requirements
+
+# custom:
+#   pythonRequirements:
+#     dockerizePip: non-linux
+#     layer:
+#       compatibleRuntimes:
+#         - python3.7
