@@ -21,3 +21,5 @@ node_modules
 local-test-files/
 # Serverless directories
 .serverless
+package.json
+package-lock.json

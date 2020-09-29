@@ -15,8 +15,8 @@ functions:
   connection:
     handler: handler.handler
     layers:
+      - {Ref: DependenciesLambdaLayer}
       # - {Ref: PythonRequirementsLambdaLayer}
-        - {Ref: DependenciesLambdaLayer}
 
 # plugins:
 #   - serverless-python-requirements
