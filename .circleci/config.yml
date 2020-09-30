@@ -12,9 +12,6 @@ jobs:
     steps:
       - checkout
 
-      - setup_remote_docker:
-          version: 19.03.12
-
       - restore_cache:
           keys:
           - v1-dependencies
@@ -22,7 +19,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            sudo npm i -g serverless
+            npm install -g aws-cli
             npm install
 
       - save_cache:
@@ -31,20 +28,20 @@ jobs:
           key: v1-dependencies
 
       - run:
-          name: Update and Make Dependency Layer 
+          name: Build react app
           command: |
-            pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
-            
+            cd snowflake_healthcheck
+            npm run build
+
       - run:
-          name: Deploy Lambda Function and Layers to AWS Console
+          name: Deploy React App to Existing S3 Bucket
           command: |
-            cd healthcheck && sls package
-            sls deploy --package .serverless
+            aws s3 sync build/ s3://react-test-healthcheck --acl public-read
 
 workflows:
   build_and_deploy:
     jobs:
       - deploy_lambda
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
