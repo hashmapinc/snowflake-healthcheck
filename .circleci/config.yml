@@ -24,9 +24,8 @@ jobs:
           command: |
             sudo npm i -g serverless
             npm install
-            pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
-            cd healthcheck && sls package
-            sls deploy --package .serverless
+            cd healthcheck/layers
+            ls
 
       - save_cache:
           paths:
