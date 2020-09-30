@@ -1,7 +1,10 @@
 version: 2.1
 
+orbs:
+  aws-cli: circleci/aws-cli@1.3.0
+  
 jobs:
-  deploy_lambda:
+  deploy_react:
     docker: 
       - image: cimg/node:14.11.0
     environment:
@@ -19,7 +22,6 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            npm install -g aws-cli
             npm install
 
       - save_cache:
@@ -41,7 +43,7 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - deploy_lambda
+      - deploy_react
           # filters:
           #   branches:
           #     only: master
