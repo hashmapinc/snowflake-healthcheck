@@ -20,26 +20,29 @@ jobs:
           - v1-dependencies
 
       - run:
-          name: Install Dependencies and Connect to AWS
+          name: Install Dependencies
           command: |
             sudo npm i -g serverless
             npm install
+            pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
+            cd healthcheck && sls package
+            sls deploy --package .serverless
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies
 
-      - run:
-          name: Update and Make Dependency Layer 
-          command: |
-            pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
+      # - run:
+      #     name: Update and Make Dependency Layer 
+      #     command: |
+      #       pushd healthcheck/layers && chmod +x get_layer_packages.sh && ./get_layer_packages.sh && popd
             
-      - run:
-          name: Deploy Lambda Function and Layers to AWS Console
-          command: |
-            cd healthcheck && sls package
-            sls deploy --package .serverless
+      # - run:
+      #     name: Deploy Lambda Function and Layers to AWS Console
+      #     command: |
+      #       cd healthcheck && sls package
+      #       sls deploy --package .serverless
 
 workflows:
   build_and_deploy:
