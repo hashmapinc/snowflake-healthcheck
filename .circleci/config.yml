@@ -10,7 +10,7 @@ jobs:
     environment:
       AWS_PROVIDER: aws
 
-    working_directory: ~/Snowflake-healthcheck/snowflake_healthcheck
+    working_directory: ~/Snowflake-healthcheck
 
     steps:
       - checkout
@@ -32,6 +32,7 @@ jobs:
       - run:
           name: Build react app
           command: |
+            cd snowflake_healthcheck
             npm run build
 
       - run:
@@ -42,11 +43,7 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
-      - install-aws-cli
       - deploy_react
-          requires:
-            - install-aws-cli
-
           # filters:
           #   branches:
           #     only: master
