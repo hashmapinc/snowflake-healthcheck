@@ -1,5 +1,5 @@
 version: 2.1
-  
+
 jobs:
   deploy_react:
     docker: 
@@ -7,27 +7,17 @@ jobs:
     environment:
       AWS_PROVIDER: aws
 
-    working_directory: ~/Snowflake-healthcheck/snowflake_healthcheck
+    working_directory: ~/Snowflake-healthcheck
 
     steps:
       - checkout
-
-      - restore_cache:
-          keys:
-          - v1-dependencies
 
       - run:
           name: Install Dependencies
           command: |
             npm install
-            sudo apt-get update && sudo apt-get install python3.7
-            sudo curl -O https://bootstrap.pypa.io.get-pip.py && sudo python get-pip.py
+            sudo apt-get install python-pip python-dev
             sudo pip install awscli --upgrade
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies
 
       - run:
           name: Build react app
