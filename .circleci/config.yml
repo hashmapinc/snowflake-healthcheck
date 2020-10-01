@@ -28,7 +28,7 @@ jobs:
           command: |
             cd snowflake_healthcheck
             npm run build
-            aws s3 sync build/ s3://react-test-healthcheck --acl public-read --delete
+            aws s3 sync build/ s3://react-test-healthcheck --delete
 
 workflows:
   build_and_deploy:

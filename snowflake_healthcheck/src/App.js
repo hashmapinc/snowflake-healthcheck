@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Testing to See if automation still works.
+          Testing to See if automation still works correctly.
         </p>
         <a
           className="App-link"
