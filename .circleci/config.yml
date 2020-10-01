@@ -42,7 +42,11 @@ jobs:
 workflows:
   build_and_deploy:
     jobs:
+      - install-aws-cli
       - deploy_react
+          requires:
+            - install-aws-cli
+
           # filters:
           #   branches:
           #     only: master
