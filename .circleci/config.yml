@@ -21,7 +21,7 @@ jobs:
           command: |
             npm install
             sudo apt-get update && sudo apt-get install python3.7
-            sudo apt-get install python3-pip
+            sudo curl -O https://bootstrap.pypa.io.get-pip.py && sudo python get-pip.py
             sudo pip install awscli --upgrade
 
       - save_cache:
