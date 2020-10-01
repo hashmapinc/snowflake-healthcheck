@@ -7,7 +7,7 @@ jobs:
     environment:
       AWS_PROVIDER: aws
 
-    working_directory: ~/Snowflake-healthcheck
+    working_directory: ~/Snowflake-healthcheck/snowflake_healthcheck
 
     steps:
       - checkout
@@ -32,7 +32,6 @@ jobs:
       - run:
           name: Build react app
           command: |
-            cd snowflake_healthcheck
             npm run build
 
       - run:
