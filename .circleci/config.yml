@@ -21,16 +21,17 @@ jobs:
             sudo curl -O https://bootstrap.pypa.io/get-pip.py
             sudo python get-pip.py
             sudo pip install awscli --upgrade
-
-      - run:
-          name: Build react app
-          command: |
             npm run build
-
-      - run:
-          name: Deploy React App to Existing S3 Bucket
-          command: |
             aws s3 sync build/ s3://react-test-healthcheck --acl public-read --delete
+      # - run:
+      #     name: Build react app
+      #     command: |
+            
+
+      # - run:
+      #     name: Deploy React App to Existing S3 Bucket
+      #     command: |
+      #       aws s3 sync build/ s3://react-test-healthcheck --acl public-read --delete
 
 workflows:
   build_and_deploy:
