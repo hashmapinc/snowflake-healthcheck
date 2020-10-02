@@ -4,10 +4,6 @@ jobs:
   deploy_react:
     docker: 
       - image: cimg/node:14.11.0
-    environment:
-      AWS_PROVIDER: aws
-
-    working_directory: ~/Snowflake-healthcheck
 
     steps:
       - checkout
