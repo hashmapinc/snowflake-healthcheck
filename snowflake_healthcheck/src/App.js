@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Testing to See if automation still works correctly.
+          React App Hosted on S3.
         </p>
         <a
           className="App-link"
