@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Install Dependencies
           command: |
-            cd snowflake_healthcheck
+            cd $WORKING_DIRECTORY
             npm install
             sudo apt-get update && sudo apt-get install -y python-dev
             sudo curl -O https://bootstrap.pypa.io/get-pip.py
@@ -22,9 +22,9 @@ jobs:
       - run:
           name: Build static files for React App and Deploy to S3
           command: |
-            cd snowflake_healthcheck
+            cd $WORKING_DIRECTORY
             npm run build
-            aws s3 sync build/ s3://dev-estimator.snowflakeinspector.com --delete
+            aws s3 sync build/ s3://$S3_BUCKET --delete
 
 workflows:
   build_and_deploy:
