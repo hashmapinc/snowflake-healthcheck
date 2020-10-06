@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          React App Hosted on S3.
+          React App With New Environment Variables.
         </p>
         <a
           className="App-link"

@@ -24,7 +24,7 @@ jobs:
           command: |
             cd $WORKING_DIRECTORY
             npm run build
-            aws s3 sync build/ s3://$S3_BUCKET --delete
+            aws s3 sync build/ s3://$S3_BUCKET_NAME --delete
 
 workflows:
   build_and_deploy:
