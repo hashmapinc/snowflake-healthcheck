@@ -24,7 +24,7 @@ jobs:
           command: |
             cd snowflake_healthcheck
             npm run build
-            aws s3 sync build/ s3://www.snowflake-healthcheck.com --delete
+            aws s3 sync build/ s3://dev-estimator.snowflakeinspector.com --delete
 
 workflows:
   build_and_deploy:
