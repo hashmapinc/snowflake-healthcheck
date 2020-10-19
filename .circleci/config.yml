@@ -38,6 +38,6 @@ workflows:
           # context: dev-healthcheck.snowflakeinspector.com # this context stores all envs for this job
           filters:
             branches:
-              only: main
+              only: master
           requires:
             - build
