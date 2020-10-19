@@ -1,0 +1,43 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@1.1.6
+  aws_s3: circleci/aws-s3@1.0.15
+
+jobs:
+  build:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: npm run build
+      - persist_to_workspace:
+          root: .
+          # Must be relative path from root
+          paths:
+            - build
+  deploy:
+    docker:
+      - image: 'cimg/python:3.6'
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - aws_s3/sync:
+          from: /tmp/workspace/build
+          overwrite: true
+          to: "s3://dev-healthcheck.snowflakeinspector.com"
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
+          # context: dev-healthcheck.snowflakeinspector.com # this context stores all envs for this job
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
