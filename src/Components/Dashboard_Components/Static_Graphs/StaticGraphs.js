@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Papa from 'papaparse';
 import '../../../main.css'
 
 class StaticGraphs extends Component {
