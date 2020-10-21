@@ -25,7 +25,7 @@ class WarehouseUsageUploaded extends Component {
 
             const PlotlyComponent = createPlotlyComponent(Plotly);                
                 
-            let layout = {title: 'Warehouse Usage Data', autosize: true, "titlefont": {"size": 16}, font: {size:8}, legend: {"orientation": "h"}};
+            let layout = {title: 'Warehouse Credit Usage Data', autosize: true, "titlefont": {"size": 16}, font: {size:8}, legend: {"orientation": "h"}};
             let useResizeHandler = true;
             let style = {width: "100%", height: "100%", marginBottom: "10px"};
 
