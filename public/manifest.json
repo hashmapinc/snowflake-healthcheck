@@ -1,6 +1,6 @@
 {
-  "short_name": "Snowflake Estimator",
-  "name": "Snowflake Estimator",
+  "short_name": "Snowflake Healthcheck",
+  "name": "Snowflake Healthcheck",
   "icons": [
     {
       "src": "favicon.ico",

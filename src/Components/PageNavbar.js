@@ -5,31 +5,8 @@ import NavModal from "./PageNavbar_Components/NavModal.js";
 import '../main.css'
 
 class PageNavbar extends Component {
-    constructor(props) {
-        super(props);
-        this.handleModalOpen = this.handleModalOpen.bind(this);
-        this.handleModalClose = this.handleModalClose.bind(this);
-
-        this.state = {
-            showModal: false,
-        }
-    }
-
-    handleModalOpen() {
-        this.setState({
-            showModal: true
-        })
-    }
-
-    handleModalClose() {
-        this.setState({
-            showModal: false
-        })
-    }
 
     render() {
-        let {showModal} = this.state;
-
         return (
             <Navbar expand="lg" bg="dark" variant="dark" fixed="top">
                 <Navbar.Brand href="https://www.hashmapinc.com/" rel="noopener noreferrer" target="_blank">
@@ -48,7 +25,13 @@ class PageNavbar extends Component {
                         <Nav.Link href="https://github.com/hashmapinc/snowflake-healthcheck" rel="noopener noreferrer" target="_blank">
                             GitHub Repo
                         </Nav.Link>
-                        <NavModal showModal={showModal} handleModalOpen={this.handleModalOpen} handleModalClose={this.handleModalClose}/>
+                        <NavModal 
+                        file_name={this.props.file_name}
+                        handleSubmit={this.props.handleSubmit} 
+                        handleInputChange={this.props.handleInputChange} 
+                        handleModalOpen={this.props.handleModalOpen} 
+                        handleModalClose={this.props.handleModalClose}
+                        showModal={this.props.showModal} />
                     </Nav>
                 </Navbar.Collapse>
             </Navbar> )

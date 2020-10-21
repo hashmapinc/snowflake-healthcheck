@@ -1,29 +1,27 @@
 import React from 'react';
 import {Modal, Button} from "react-bootstrap";
+import UploadForm from "./UploadForm.js";
+import CopyQuery from "./CopyQuery.js";
 import '../../main.css'
 
 class NavModal extends React.Component {
     render() {
         return (
             <>
-              <Button variant="primary" onClick={this.props.handleOpen}>
-                Launch demo modal
+              <Button variant="primary" onClick={this.props.handleModalOpen}>
+                Check Environment Health
               </Button>
-        
-              <Modal onHide={this.props.handleClose}>
-                <Modal.Header closeButton>
-                  <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={this.props.handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={this.props.handleClose}>
-                    Save Changes
-                  </Button>
-                </Modal.Footer>
-              </Modal>
+                <Modal size="lg" show={this.props.showModal} onHide={this.props.handleModalClose}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Run this query in your Snowflake account and upload the result file below</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <CopyQuery />
+                    <UploadForm file_name={this.props.file_name} handleSubmit={this.props.handleSubmit} handleModalClose={this.props.handleModalClose} handleInputChange={this.props.handleInputChange}/>
+                  </Modal.Body>
+                  <Modal.Footer>
+                  </Modal.Footer>
+                </Modal>
             </>
           );
     }

@@ -1,12 +1,73 @@
 import React, {Component} from 'react';
-import PageNavbar from './Components/PageNavbar';
-
+import PageNavbar from './Components/PageNavbar.js';
+import Dashboard from './Components/Dashboard.js';
+import * as Papa from 'papaparse';
 import './main.css'
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleModalOpen = this.handleModalOpen.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
+    this.updateData = this.updateData.bind(this);
+    this.state = {
+        file_name: null,
+        file: null,
+        healthcheck_data: null,
+        showModal: false,
+    }
+}
 
-  
+        
+
+  handleModalOpen() {
+      this.setState({
+          showModal: true
+      });
+  }
+
+  handleModalClose() {
+      this.setState({
+          showModal: false
+      })
+  }
+
+  handleInputChange(e){
+    this.setState({
+        file_name : e.target.files[0].name,
+        file: e.target.files[0]
+    });
+    console.log(this.state.file_name);
+  }
+
+
+  handleSubmit(e){
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    if (form.checkValidity() === false){
+      e.stopPropagation();
+    }
+    const {file} = this.state;
+    Papa.parse(file, {complete: this.updateData, header: false})
+  }
+
+  updateData(result){
+    let data = result.data;
+    const updated_data = data.slice(1);
+    const clean_data = updated_data.map(x => JSON.parse(x[0]));
+    const warehouse_health_data = clean_data.filter(x => x.type==="warehouse_health");
+    const warehouse_usage_data = clean_data.filter(x => x.type==="warehouse_usage");
+    console.log(data);
+    this.setState({
+      healthcheck_data: clean_data
+    });
+    debugger;
+  }
+
 
   render() {
     return (
@@ -20,7 +81,14 @@ class App extends Component {
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         
-        <PageNavbar />
+        <PageNavbar 
+        file_name={this.state.file_name} 
+        handleSubmit={this.handleSubmit} 
+        handleInputChange={this.handleInputChange} 
+        handleModalClose={this.handleModalClose} 
+        handleModalOpen={this.handleModalOpen}
+        showModal={this.state.showModal}/>
+        <Dashboard healthcheck_data={this.state.healthcheck_data}/>
 
         <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
