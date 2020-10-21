@@ -57,15 +57,15 @@ class App extends Component {
 
   updateData(result){
     let data = result.data;
+    // removes header that doesn't contain data
     const updated_data = data.slice(1);
     const clean_data = updated_data.map(x => JSON.parse(x[0]));
-    const warehouse_health_data = clean_data.filter(x => x.type==="warehouse_health");
-    const warehouse_usage_data = clean_data.filter(x => x.type==="warehouse_usage");
+    // const warehouse_health_data = clean_data.filter(x => x.type==="warehouse_health");
+    // const warehouse_usage_data = clean_data.filter(x => x.type==="warehouse_usage");
     console.log(data);
     this.setState({
       healthcheck_data: clean_data
     });
-    debugger;
   }
 
 

@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
-import StaticGraphs from './StaticGraphs.js';
-import UploadedGraphs from './UploadedGraphs.js';
+import StaticGraphs from './Dashboard_Components/Static_Graphs/StaticGraphs.js';
+import WarehouseHealthUploaded from './Dashboard_Components/Uploaded_Graphs/WarehouseHealthUploaded.js';
+import WarehouseUsageUploaded from './Dashboard_Components/Uploaded_Graphs/WarehouseUsageUploaded.js';
 import '../main.css'
 
 class Dashboard extends Component {
 
     render() {
-        if (this.props.file_data) {
+        if (this.props.healthcheck_data) {
             return (
                 <div className="mx-auto">
-                    <h4>We have a file!</h4>
-                    <UploadedGraphs file_data={this.props.file_data}/>
+                    <WarehouseHealthUploaded healthcheck_data={this.props.healthcheck_data}/>
+                    <WarehouseUsageUploaded healthcheck_data={this.props.healthcheck_data}/>
+
                 </div>
                 
             )}
