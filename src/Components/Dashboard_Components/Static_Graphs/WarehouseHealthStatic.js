@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../../../main.css'
 
-class StaticGraphs extends Component {
+class WarehouseHealthStatic extends Component {
     constructor(){
         super();
         this.state = {
@@ -17,4 +17,4 @@ class StaticGraphs extends Component {
 }
 
 
-export default StaticGraphs
+export default WarehouseHealthStatic
