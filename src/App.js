@@ -16,13 +16,36 @@ class App extends Component {
     this.state = {
         file_name: null,
         file: null,
-        healthcheck_data: null,
+        localData: null,
         showModal: false,
+        warehouse_health_data: null,
+        warehouse_usage_data: null
+
     }
 }
+// Used to fetch local data
+componentWillMount() {
+  this.getLocalCsvData();
+}
 
+fetchLocalCsv() {
+  return fetch('/data/default_data.csv').then(function (response) {
+      let reader = response.body.getReader();
+      let decoder = new TextDecoder('utf-8');
+
+      return reader.read().then(function (result) {
+          return decoder.decode(result.value);
+      });
+  });
+}
+
+async getLocalCsvData() {
+  let localCsvData = await this.fetchLocalCsv();
+
+  Papa.parse(localCsvData, {complete: this.updateData});
+}
         
-
+// used to get uploaded data
   handleModalOpen() {
       this.setState({
           showModal: true
@@ -52,19 +75,18 @@ class App extends Component {
       e.stopPropagation();
     }
     const {file} = this.state;
-    Papa.parse(file, {complete: this.updateData, header: false})
+    Papa.parse(file, {complete: this.updateData})
   }
 
+  // used for both local and uploaded data
   updateData(result){
     let data = result.data;
     // removes header that doesn't contain data
     const updated_data = data.slice(1);
     const clean_data = updated_data.map(x => JSON.parse(x[0]));
-    // const warehouse_health_data = clean_data.filter(x => x.type==="warehouse_health");
-    // const warehouse_usage_data = clean_data.filter(x => x.type==="warehouse_usage");
-    console.log(data);
     this.setState({
-      healthcheck_data: clean_data
+      warehouse_health_data: clean_data.filter(x => x.type==="warehouse_health"),
+      warehouse_usage_data: clean_data.filter(x => x.type==="warehouse_usage"),
     });
   }
 
@@ -88,7 +110,7 @@ class App extends Component {
         handleModalClose={this.handleModalClose} 
         handleModalOpen={this.handleModalOpen}
         showModal={this.state.showModal}/>
-        <Dashboard healthcheck_data={this.state.healthcheck_data}/>
+        <Dashboard warehouse_health_data={this.state.warehouse_health_data} warehouse_usage_data={this.state.warehouse_usage_data}/>
 
         <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

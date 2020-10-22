@@ -5,7 +5,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import dataQuery from "!!raw-loader!../../sql/healthcheck_query.sql";
 import '../../main.css'
 
-class CopyQuery extends React.Component {
+class HealthcheckQuery extends React.Component {
 
   render() {
     return (
@@ -25,4 +25,4 @@ class CopyQuery extends React.Component {
   }
 }
 
-export default CopyQuery;
+export default HealthcheckQuery;

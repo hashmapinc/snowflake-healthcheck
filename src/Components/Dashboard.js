@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
-import WarehouseHealthUploaded from './Dashboard_Components/Uploaded_Graphs/WarehouseHealthUploaded.js';
-import WarehouseUsageUploaded from './Dashboard_Components/Uploaded_Graphs/WarehouseUsageUploaded.js';
+import WarehouseHealth from './Dashboard_Components/Graphs/WarehouseHealth.js';
+import WarehouseUsage from './Dashboard_Components/Graphs/WarehouseUsage.js';
 import '../main.css'
 
 class Dashboard extends Component {
 
     render() {
-        if (this.props.healthcheck_data) {
+        if (this.props.warehouse_health_data) {
             return (
                 <div className="mx-auto">
-                    <WarehouseHealthUploaded healthcheck_data={this.props.healthcheck_data}/>
-                    <WarehouseUsageUploaded healthcheck_data={this.props.healthcheck_data}/>
+                    <WarehouseHealth warehouse_health_data={this.props.warehouse_health_data}/>
+                    <WarehouseUsage warehouse_usage_data={this.props.warehouse_usage_data}/>
                 </div>
-                
-            )}
-        else {
-            return  <div></div>
+            )
+        } else {
+            return <div></div>
         }
-        
+            
+                    
     }
 }
 

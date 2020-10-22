@@ -2,7 +2,7 @@ import React from 'react';
 import {Button} from "react-bootstrap";
 import '../../main.css'
 
-class UploadFileButton extends React.Component {
+class UploadCSVButton extends React.Component {
 
     render() {
         return (
@@ -17,4 +17,4 @@ class UploadFileButton extends React.Component {
     }
 }
 
-export default UploadFileButton;
+export default UploadCSVButton;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import hashmaplogo from '../hashmap_banner_white.png';
 import {Navbar, Nav} from "react-bootstrap";
-import NavModal from "./PageNavbar_Components/NavModal.js";
+import HealthcheckModal from "./PageNavbar_Components/HealthcheckModal.js";
 import '../main.css'
 
 class PageNavbar extends Component {
@@ -25,7 +25,7 @@ class PageNavbar extends Component {
                         <Nav.Link href="https://github.com/hashmapinc/snowflake-healthcheck" rel="noopener noreferrer" target="_blank">
                             GitHub Repo
                         </Nav.Link>
-                        <NavModal 
+                        <HealthcheckModal 
                         file_name={this.props.file_name}
                         handleSubmit={this.props.handleSubmit} 
                         handleInputChange={this.props.handleInputChange} 

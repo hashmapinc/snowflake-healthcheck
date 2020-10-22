@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../main.css'
 
-class UploadFile extends React.Component {
+class UploadCSV extends React.Component {
 
     render() {
         let {file_name} = this.props;
@@ -30,4 +30,4 @@ class UploadFile extends React.Component {
     }
 }
 
-export default UploadFile;
+export default UploadCSV;

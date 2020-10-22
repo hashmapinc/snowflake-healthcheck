@@ -1,10 +1,10 @@
 import React from 'react';
 import {Modal, Button} from "react-bootstrap";
 import UploadForm from "./UploadForm.js";
-import CopyQuery from "./CopyQuery.js";
+import HealthcheckQuery from "./HealthcheckQuery.js";
 import '../../main.css'
 
-class NavModal extends React.Component {
+class HealthcheckModal extends React.Component {
     render() {
         return (
             <>
@@ -16,7 +16,7 @@ class NavModal extends React.Component {
                     <Modal.Title>Run this query in your Snowflake account and upload the result file below</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <CopyQuery />
+                    <HealthcheckQuery />
                     <UploadForm file_name={this.props.file_name} handleSubmit={this.props.handleSubmit} handleModalClose={this.props.handleModalClose} handleInputChange={this.props.handleInputChange}/>
                   </Modal.Body>
                   <Modal.Footer>
@@ -27,4 +27,4 @@ class NavModal extends React.Component {
     }
 }
 
-export default NavModal;
+export default HealthcheckModal;

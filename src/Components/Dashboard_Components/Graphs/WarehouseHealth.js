@@ -3,20 +3,19 @@ import Plotly from 'plotly.js-basic-dist-min';
 import createPlotlyComponent from 'react-plotly.js/factory';
 import '../../../main.css'
 
-class WarehouseHealthUploaded extends Component {
+class WarehouseHealth extends Component {
         render() {
-            const warehouse_health_data = this.props.healthcheck_data.filter(x => x.type==="warehouse_health");
             var i;
             let health_x_arr = [];
             let health_y_med_execution = [];
             let health_y_overload = [];
             let health_y_provision = [];
 
-            for (i = 0; i < warehouse_health_data.length; i++) {
-                health_x_arr.push(warehouse_health_data[i].data.WAREHOUSE);
-                health_y_med_execution.push(warehouse_health_data[i].data.MEDIAN_EXECUTION_TIME_MINUTES.toFixed(3));
-                health_y_overload.push(warehouse_health_data[i].data.MEDIAN_QUEUED_OVERLOAD_TIME_MINUTES.toFixed(3));
-                health_y_provision.push(warehouse_health_data[i].data.MEDIAN_QUEUED_PROVISIONING_TIME_MINUTES.toFixed(3));             
+            for (i = 0; i < this.props.warehouse_health_data.length; i++) {
+                health_x_arr.push(this.props.warehouse_health_data[i].data.WAREHOUSE);
+                health_y_med_execution.push(this.props.warehouse_health_data[i].data.MEDIAN_EXECUTION_TIME_MINUTES.toFixed(3));
+                health_y_overload.push(this.props.warehouse_health_data[i].data.MEDIAN_QUEUED_OVERLOAD_TIME_MINUTES.toFixed(3));
+                health_y_provision.push(this.props.warehouse_health_data[i].data.MEDIAN_QUEUED_PROVISIONING_TIME_MINUTES.toFixed(3));             
         };
 
             const PlotlyComponent = createPlotlyComponent(Plotly);                
@@ -86,4 +85,4 @@ class WarehouseHealthUploaded extends Component {
     }
 
 
-export default WarehouseHealthUploaded
+export default WarehouseHealth
