@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#newCalcButton { 
+  margin-bottom: 15px;
+}
+
+.link { 
+  text-decoration: underline;
+  color: #1F77B4;
+}
