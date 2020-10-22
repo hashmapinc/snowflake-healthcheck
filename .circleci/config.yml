@@ -28,14 +28,14 @@ jobs:
       - aws_s3/sync:
           from: /tmp/workspace/build
           overwrite: true
-          to: "s3://dev-healthcheck.snowflakeinspector.com"
+          to: "s3://healthcheck.snowflakeinspector.com"
 
 workflows:
   build_and_deploy:
     jobs:
       - build
       - deploy:
-          # context: dev-healthcheck.snowflakeinspector.com # this context stores all envs for this job
+          context: healthcheck.snowflakeinspector.com # this context stores all envs for this job
           filters:
             branches:
               only: master
