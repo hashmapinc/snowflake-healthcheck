@@ -18,8 +18,8 @@ class PageNavbar extends Component {
                         <h3>Snowflake Healthcheck</h3>
                     </div>
                     <Nav className="ml-auto">
-                        <Nav.Link href="#Contact Us" rel="noopener noreferrer" target="_blank">Contact Us</Nav.Link>
-                        <Nav.Link href="#Feedback" rel="noopener noreferrer" target="_blank">
+                        <Nav.Link href="https://www.hashmapinc.com/snowflakehealthcheck-reachout" rel="noopener noreferrer" target="_blank">Contact Us</Nav.Link>
+                        <Nav.Link href="https://docs.google.com/forms/d/e/1FAIpQLSfdwvdakOH7p9cX0y5OXvXsTajKqg_KzKTrSSEZpssx8LgQ2g/viewform?usp=sf_link" rel="noopener noreferrer" target="_blank">
                             Feedback
                         </Nav.Link>
                         <Nav.Link href="https://github.com/hashmapinc/snowflake-healthcheck" rel="noopener noreferrer" target="_blank">
