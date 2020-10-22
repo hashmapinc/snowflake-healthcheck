@@ -29,11 +29,7 @@ class WarehouseHealth extends Component {
                 hoverinfo: "none",
                 name: 'Median Execution Time',
                 marker: {
-                    color: 'rgb(92, 98, 156)',
-                    line: {
-                    color: 'rgb(8,48,107)',
-                    width: 1.5
-                    }
+                    color: 'hex(#1F77B4)',
                 }
                 };
                 
@@ -46,11 +42,7 @@ class WarehouseHealth extends Component {
                 hoverinfo: "none",
                 name: "Median Queued Overload Time",
                 marker: {
-                    color: 'rgb(181, 113, 94)',
-                    line: {
-                    color: 'rgb(8,48,107)',
-                    width: 1.5
-                    }
+                    color: 'hex(#FF7F0E)',
                 }
                 };
 
@@ -63,11 +55,7 @@ class WarehouseHealth extends Component {
                 hoverinfo: "none",
                 name: 'Median Queued Provisioning Time',
                 marker: {
-                    color: 'rgb(158,202,225)',
-                    line: {
-                    color: 'rgb(8,48,107)',
-                    width: 1.5
-                    }
+                    color: 'hex(#2CA02C)',
                 }
                 };
             
