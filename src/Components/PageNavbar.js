@@ -31,7 +31,9 @@ class PageNavbar extends Component {
                         handleInputChange={this.props.handleInputChange} 
                         handleModalOpen={this.props.handleModalOpen} 
                         handleModalClose={this.props.handleModalClose}
-                        showModal={this.props.showModal} />
+                        showModal={this.props.showModal}
+                        clipboardButtonText={this.props.clipboardButtonText}
+                        handleCopyToClipboard={this.props.handleCopyToClipboard}/>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar> )

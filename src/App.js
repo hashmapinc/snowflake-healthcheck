@@ -13,6 +13,7 @@ class App extends Component {
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
     this.updateData = this.updateData.bind(this);
+    this.handleCopyToClipboard = this.handleCopyToClipboard.bind(this);
     this.state = {
         file_name: null,
         file: null,
@@ -21,6 +22,7 @@ class App extends Component {
         warehouse_health_data: null,
         warehouse_usage_data: null,
         csvHeader: null,
+        clipboardButtonText: "Copy to clipboard"
 
     }
 }
@@ -45,6 +47,13 @@ async getLocalCsvData() {
 
   Papa.parse(localCsvData, {complete: this.updateData});
 }
+
+// handles copy to clipboard text change on button click
+  handleCopyToClipboard() {
+    this.setState({
+      clipboardButtonText: "Copied!"
+    })
+  }
         
 // used to get uploaded data
   handleModalOpen() {
@@ -56,7 +65,8 @@ async getLocalCsvData() {
   handleModalClose() {
       this.setState({
           showModal: false,
-          file_name: "Download your query results as a CSV and upload here"
+          file_name: "Download your query results as a CSV and upload here",
+          clipboardButtonText: "Copy to clipboard"
       })
   }
 
@@ -127,7 +137,9 @@ async getLocalCsvData() {
         handleInputChange={this.handleInputChange} 
         handleModalClose={this.handleModalClose} 
         handleModalOpen={this.handleModalOpen}
-        showModal={this.state.showModal}/>
+        showModal={this.state.showModal}
+        clipboardButtonText={this.state.clipboardButtonText}
+        handleCopyToClipboard={this.handleCopyToClipboard}/>
         <Dashboard warehouse_health_data={this.state.warehouse_health_data} warehouse_usage_data={this.state.warehouse_usage_data}/>
 
         <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
