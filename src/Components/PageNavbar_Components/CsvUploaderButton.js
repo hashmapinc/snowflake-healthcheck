@@ -2,11 +2,11 @@ import React from 'react';
 import {Button} from "react-bootstrap";
 import '../../main.css'
 
-class UploadCSVButton extends React.Component {
+class CsvUploaderButton extends React.Component {
 
     render() {
         return (
-            <Button type="submit" variant="btn btn-primary btn-md" onClick={this.props.handleModalClose}>
+            <Button type="submit" variant="btn btn-primary btn-md">
                 Visualize
             </Button>
             
@@ -17,4 +17,4 @@ class UploadCSVButton extends React.Component {
     }
 }
 
-export default UploadCSVButton;
+export default CsvUploaderButton;

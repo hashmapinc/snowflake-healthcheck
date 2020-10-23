@@ -24,16 +24,11 @@ class WarehouseHealth extends Component {
                 x: health_x_arr,
                 y: health_y_med_execution,
                 type: 'bar',
-                text: health_y_med_execution.map(String),
                 textposition: 'auto',
-                hoverinfo: "none",
+                hoverinfo: "y",
                 name: 'Median Execution Time',
                 marker: {
-                    color: 'rgb(92, 98, 156)',
-                    line: {
-                    color: 'rgb(8,48,107)',
-                    width: 1.5
-                    }
+                    color: 'hex(#1F77B4)',
                 }
                 };
                 
@@ -41,16 +36,11 @@ class WarehouseHealth extends Component {
                 x: health_x_arr,
                 y: health_y_overload,
                 type: 'bar',
-                text: health_y_overload.map(String),
                 textposition: 'auto',
-                hoverinfo: "none",
+                hoverinfo: "y",
                 name: "Median Queued Overload Time",
                 marker: {
-                    color: 'rgb(181, 113, 94)',
-                    line: {
-                    color: 'rgb(8,48,107)',
-                    width: 1.5
-                    }
+                    color: 'hex(#FF7F0E)',
                 }
                 };
 
@@ -58,21 +48,18 @@ class WarehouseHealth extends Component {
                 x: health_x_arr,
                 y: health_y_provision,
                 type: 'bar',
-                text: health_y_provision.map(String),
                 textposition: 'auto',
-                hoverinfo: "none",
+                hoverinfo: "y",
                 name: 'Median Queued Provisioning Time',
                 marker: {
-                    color: 'rgb(158,202,225)',
-                    line: {
-                    color: 'rgb(8,48,107)',
-                    width: 1.5
-                    }
+                    color: 'hex(#2CA02C)',
                 }
                 };
             
             let data = [trace_execution, trace_provision, trace_overload];
-            let layout = {title: 'Warehouse Health Data', autosize: true, "titlefont": {"size": 16}, font: {size: 8}, legend: {x: 1, y: 0.5}};
+            let layout = {title: 'Warehouse Health', autosize: true, "titlefont": {"size": 16, "color":"black"}, font: {size: 8, color:"black"}, legend: {x: 1, y: 0.5}, yaxis: {
+                title: 'Median Minutes', titlefont: {size: 12, color: 'black'}, automargin: true, showgrid: false, showline: true}, xaxis: {automargin: true}
+            }
             let useResizeHandler = true;
             let style = {width: "100%", height: "100%", marginBottom: "10px"};
 

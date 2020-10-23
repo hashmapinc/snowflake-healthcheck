@@ -11,7 +11,7 @@ class WarehouseUsage extends Component {
             for (i = 0; i < this.props.warehouse_usage_data.length; i++) {
 
                 if (this.props.warehouse_usage_data[i].data.WAREHOUSE in usage_graph_data === false) {
-                    usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE] = {x: [], y: [], name: this.props.warehouse_usage_data[i].data.WAREHOUSE, hoverinfo: 'none', stackgroup: 'one'};
+                    usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE] = {x: [], y: [], name: this.props.warehouse_usage_data[i].data.WAREHOUSE, stackgroup: 'one'};
                 }
                 usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE].x.push(this.props.warehouse_usage_data[i].data.DATE);
                 usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE].y.push(this.props.warehouse_usage_data[i].data.COMPUTE_CREDITS.toFixed(3));
@@ -23,7 +23,8 @@ class WarehouseUsage extends Component {
 
             const PlotlyComponent = createPlotlyComponent(Plotly);                
                 
-            let layout = {title: 'Warehouse Credit Usage Data', autosize: true, "titlefont": {"size": 16}, font: {size:8}, legend: {"orientation": "h"}};
+            let layout = {title: 'Daily Compute Credit Usage by Warehouse', autosize: true, "titlefont": {"size": 16, "color":"black"}, font: {size:8, color:"black"}, legend: {"orientation": "h"}, yaxis: {
+                title: 'Compute Credits', titlefont: {size: 12, color: "black"}, automargin: true, showgrid: false, showline: true}, hovermode: "closest", hoverlabel: {namelength: -1},xaxis: {automargin: true, showgrid: false}};
             let useResizeHandler = true;
             let style = {width: "100%", height: "100%", marginBottom: "10px"};
 
