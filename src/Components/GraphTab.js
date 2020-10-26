@@ -6,7 +6,7 @@ import '../main.css'
 
 class GraphTab extends Component {
   componentDidMount() {
-    const interval = setInterval(function() {
+    setInterval(function() {
       // this is a short term fix to bad plotly resize handling.
       window.dispatchEvent(new Event('resize'));
     }, 500);
