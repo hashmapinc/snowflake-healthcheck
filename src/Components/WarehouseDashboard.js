@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import WarehouseHealth from './Dashboard_Components/Graphs/WarehouseHealth.js';
-import WarehouseUsage from './Dashboard_Components/Graphs/WarehouseUsage.js';
+import WarehouseHealth from './Warehouse_Dashboard_Components/Graphs/WarehouseHealth.js';
+import WarehouseUsage from './Warehouse_Dashboard_Components/Graphs/WarehouseUsage.js';
 import '../main.css'
 
-class Dashboard extends Component {
+class WarehouseDashboard extends Component {
 
     render() {
         if (this.props.warehouse_health_data) {
@@ -21,4 +21,4 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard
+export default WarehouseDashboard

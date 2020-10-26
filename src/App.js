@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PageNavbar from './Components/PageNavbar.js';
-import Dashboard from './Components/Dashboard.js';
+import GraphTab from './Components/GraphTab.js';
 import * as Papa from 'papaparse';
 import './main.css'
 import './App.css';
@@ -21,6 +21,7 @@ class App extends Component {
         showModal: false,
         warehouse_health_data: null,
         warehouse_usage_data: null,
+        database_datasize_data: null,
         csvHeader: null,
         clipboardButtonText: "Copy to clipboard"
 
@@ -108,6 +109,7 @@ async getLocalCsvData() {
       this.setState({
         warehouse_health_data: clean_data.filter(x => x.type==="warehouse_health"),
         warehouse_usage_data: clean_data.filter(x => x.type==="warehouse_usage"),
+        database_datasize_data: clean_data.filter(x => x.type==="database_usage"),
       });
       this.handleModalClose();
     } else {
@@ -140,7 +142,7 @@ async getLocalCsvData() {
         showModal={this.state.showModal}
         clipboardButtonText={this.state.clipboardButtonText}
         handleCopyToClipboard={this.handleCopyToClipboard}/>
-        <Dashboard warehouse_health_data={this.state.warehouse_health_data} warehouse_usage_data={this.state.warehouse_usage_data}/>
+        <GraphTab database_datasize_data={this.state.database_datasize_data} warehouse_health_data={this.state.warehouse_health_data} warehouse_usage_data={this.state.warehouse_usage_data}/>
 
         <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
