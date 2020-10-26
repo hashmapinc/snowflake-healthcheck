@@ -8,7 +8,7 @@ class GraphTab extends Component {
 
     render() {
         return (
-            <Tabs defaultActiveKey="Database" className="mt-4">
+            <Tabs defaultActiveKey="Warehouse" className="mt-4">
                 <Tab eventKey="Warehouse" title="Warehouse">
                     <WarehouseDashboard warehouse_health_data={this.props.warehouse_health_data} warehouse_usage_data={this.props.warehouse_usage_data}/>
                 </Tab>
