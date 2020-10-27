@@ -5,7 +5,7 @@ import DatabaseDashboard from './DatabaseDashboard.js';
 import '../main.css'
 
 class GraphTab extends Component {
-  componentDidMount() {
+  componentWillMount() {
     setInterval(function() {
       // this is a short term fix to bad plotly resize handling.
       window.dispatchEvent(new Event('resize'));

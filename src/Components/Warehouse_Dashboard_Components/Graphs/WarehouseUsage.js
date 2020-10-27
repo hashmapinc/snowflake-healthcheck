@@ -23,8 +23,39 @@ class WarehouseUsage extends Component {
 
             const PlotlyComponent = createPlotlyComponent(Plotly);                
                 
-            let layout = {title: 'Daily Compute Credit Usage by Warehouse', autosize: true, "titlefont": {"size": 16, "color":"black"}, font: {size:8, color:"black"}, legend: {"orientation": "h"}, yaxis: {
-                title: 'Compute Credits', titlefont: {size: 12, color: "black"}, automargin: true, showgrid: false, showline: true}, hovermode: "closest", hoverlabel: {namelength: -1},xaxis: {automargin: true, showgrid: false}};
+            let layout = {
+                "title": 'Daily Compute Credit Usage by Warehouse - Last 30 Days', 
+                "autosize": true, 
+                "titlefont": {
+                    "size": 16, 
+                    "color":"black"
+                }, 
+                "font": {
+                    "size":8, 
+                    "color":"black"
+                }, 
+                "legend": {
+                    "orientation": "h",
+                    "y": -.1
+                }, 
+                "yaxis": {
+                    "title": 'Compute Credits', 
+                    "titlefont": {
+                        "size": 12, 
+                        "color": "black"
+                    }, 
+                    "automargin": true, 
+                    "showgrid": false, 
+                    "showline": true
+                }, 
+                "hovermode": "closest", 
+                "hoverlabel": {
+                    "namelength": -1
+                },
+                "xaxis": {
+                    "automargin": true, 
+                    "showgrid": false
+                }};
             let useResizeHandler = true;
             let style = {width: "100%", height: "100%", marginBottom: "10px"};
 
