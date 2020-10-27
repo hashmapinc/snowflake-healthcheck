@@ -57,8 +57,35 @@ class WarehouseHealth extends Component {
                 };
             
             let data = [trace_execution, trace_provision, trace_overload];
-            let layout = {title: 'Warehouse Health', autosize: true, "titlefont": {"size": 16, "color":"black"}, font: {size: 8, color:"black"}, legend: {x: 1, y: 0.5}, yaxis: {
-                title: 'Median Minutes', titlefont: {size: 12, color: 'black'}, automargin: true, showgrid: false, showline: true}, hovermode: "closest", xaxis: {automargin: true}
+            let layout = {
+                "title": 'Warehouse Health - Last 30 Days', 
+                "autosize": true, 
+                "titlefont": {
+                    "size": 16, 
+                    "color":"black"
+                }, 
+                "font": {
+                    "size": 8, 
+                    "color":"black"
+                }, 
+                "legend": {
+                    "x": 1, 
+                    "y": 0.5
+                }, 
+                "yaxis": {
+                    "title": 'Median Minutes', 
+                    "titlefont": {
+                        "size": 12, 
+                        "color": 'black'
+                    }, 
+                    "automargin": true, 
+                    "showgrid": false, 
+                    "showline": true
+                }, 
+                "hovermode": "closest", 
+                "xaxis": {
+                    "automargin": true
+                }
             }
             let useResizeHandler = true;
             let style = {width: "100%", height: "100%", marginBottom: "10px"};

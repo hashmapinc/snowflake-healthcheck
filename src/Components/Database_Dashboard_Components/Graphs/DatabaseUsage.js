@@ -4,6 +4,7 @@ import createPlotlyComponent from 'react-plotly.js/factory';
 import '../../../main.css'
 
 class DatabaseUsage extends Component {
+  
   render() {
       let datasize_traces = []
       let datasize_graph_data = {};
@@ -24,7 +25,7 @@ class DatabaseUsage extends Component {
       const PlotlyComponent = createPlotlyComponent(Plotly);                
 
       let layout = {
-        "title": 'Daily Gigabyte Usage by Database', 
+        "title": 'Daily Gigabyte Usage by Database - Last 30 Days', 
         "autosize": true, 
         "titlefont": { 
           "size": 16, 
@@ -35,7 +36,8 @@ class DatabaseUsage extends Component {
           "color": "black" 
         }, 
         "legend": { 
-          "orientation": "h" 
+          "orientation": "h",
+          "y": -.1 
         }, 
         "yaxis": {
           "title": 'Gigabytes', 
