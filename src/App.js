@@ -28,7 +28,7 @@ class App extends Component {
     }
 }
 // Used to fetch local data
-componentWillMount() {
+componentDidMount() {
   this.getLocalCsvData();
 }
 
