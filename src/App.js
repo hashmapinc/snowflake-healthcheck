@@ -33,7 +33,12 @@ componentDidMount() {
 }
 
 fetchLocalCsv() {
-  return fetch('/data/default_data.csv').then(function (response) {
+  return fetch('/data/default_data.csv', {
+    headers: {
+      'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+  }).then(function (response) {
       let reader = response.body.getReader();
       let decoder = new TextDecoder('utf-8');
 
@@ -105,7 +110,15 @@ async getLocalCsvData() {
     if (this.state.csvHeader[0] === "HEALTHCHECK_V1") {
       // removes header that doesn't contain data
       const updated_data = data.slice(1);
-      const clean_data = updated_data.map(x => JSON.parse(x[0]));
+      let clean_data = [];
+      try {
+        clean_data = updated_data.map(x => JSON.parse(x[0]));
+      } catch(error) { 
+        console.log("Error ", error);
+        console.log("Result ", result);
+        console.log("Data ", updated_data);
+        alert("Please reload the page. The default graphs did not load.");
+      };
       this.setState({
         warehouse_health_data: clean_data.filter(x => x.type==="warehouse_health"),
         warehouse_usage_data: clean_data.filter(x => x.type==="warehouse_usage"),
