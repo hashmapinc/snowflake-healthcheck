@@ -33,7 +33,12 @@ componentDidMount() {
 }
 
 fetchLocalCsv() {
-  return fetch('/data/default_data.csv').then(function (response) {
+  return fetch('/data/default_data.csv', {
+    headers: {
+      'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+  }).then(function (response) {
       let reader = response.body.getReader();
       let decoder = new TextDecoder('utf-8');
 
@@ -102,6 +107,13 @@ async getLocalCsvData() {
     this.setState({
       csvHeader: data[0]
     });
+    try {
+      console.log('No error')
+    }
+    catch(error) {
+      console.log('Error ', error);
+      console.log('Error Data', data)
+    };
     if (this.state.csvHeader[0] === "HEALTHCHECK_V1") {
       // removes header that doesn't contain data
       const updated_data = data.slice(1);
