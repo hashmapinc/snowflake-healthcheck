@@ -1,3 +1,4 @@
+# Snowflake Healthcheck
 This repo holds the Snowflake Healthcheck tool. This tool generates a dashboard that helps users measure and improve the health of their Snowflake environment. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
