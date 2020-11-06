@@ -17,7 +17,7 @@ class DatabaseUsage extends Component {
                 y: [], 
                 name: this.props.database_datasize_data[i].data.DATABASE, 
                 stackgroup: 'one', 
-                hoverinfo:"y+name"
+                hovertemplate: '%{y} GB',
               };
           }
           datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE].x.push(this.props.database_datasize_data[i].data.DATE);

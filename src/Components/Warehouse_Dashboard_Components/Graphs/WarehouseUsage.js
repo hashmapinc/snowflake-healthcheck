@@ -16,7 +16,7 @@ class WarehouseUsage extends Component {
                         y: [], 
                         name: this.props.warehouse_usage_data[i].data.WAREHOUSE, 
                         stackgroup: 'one',
-                        hoverinfo:"y+name"
+                        hovertemplate: '%{y} credits'
                     };
                 }
                 usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE].x.push(this.props.warehouse_usage_data[i].data.DATE);

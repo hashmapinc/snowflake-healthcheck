@@ -16,7 +16,7 @@ class TableActiveStorage extends Component {
       name: graph_data.data.TABLE_NAME,
       type: 'bar',
       mode:'markers',
-      hoverinfo:"y+name"
+      hovertemplate: '%{y} GB'
     }
   }
   render() {
