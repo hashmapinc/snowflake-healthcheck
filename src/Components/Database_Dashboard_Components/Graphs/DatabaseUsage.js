@@ -12,7 +12,13 @@ class DatabaseUsage extends Component {
       for (i = 0; i < this.props.database_datasize_data.length; i++) {
 
           if (this.props.database_datasize_data[i].data.DATABASE in datasize_graph_data === false) {
-              datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE] = {x: [], y: [], name: this.props.database_datasize_data[i].data.DATABASE, stackgroup: 'one'};
+              datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE] = {
+                x: [], 
+                y: [], 
+                name: this.props.database_datasize_data[i].data.DATABASE, 
+                stackgroup: 'one', 
+                hoverinfo:"y+name"
+              };
           }
           datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE].x.push(this.props.database_datasize_data[i].data.DATE);
           datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE].y.push(this.props.database_datasize_data[i].data.AVERAGE_DAILY_USAGE_GIGABYTES.toFixed(2));

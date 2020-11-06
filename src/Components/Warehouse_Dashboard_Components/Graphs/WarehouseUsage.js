@@ -11,7 +11,13 @@ class WarehouseUsage extends Component {
             for (i = 0; i < this.props.warehouse_usage_data.length; i++) {
 
                 if (this.props.warehouse_usage_data[i].data.WAREHOUSE in usage_graph_data === false) {
-                    usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE] = {x: [], y: [], name: this.props.warehouse_usage_data[i].data.WAREHOUSE, stackgroup: 'one'};
+                    usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE] = {
+                        x: [], 
+                        y: [], 
+                        name: this.props.warehouse_usage_data[i].data.WAREHOUSE, 
+                        stackgroup: 'one',
+                        hoverinfo:"y+name"
+                    };
                 }
                 usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE].x.push(this.props.warehouse_usage_data[i].data.DATE);
                 usage_graph_data[this.props.warehouse_usage_data[i].data.WAREHOUSE].y.push(this.props.warehouse_usage_data[i].data.COMPUTE_CREDITS.toFixed(3));

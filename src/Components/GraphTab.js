@@ -19,7 +19,7 @@ class GraphTab extends Component {
                     <WarehouseDashboard warehouse_health_data={this.props.warehouse_health_data} warehouse_usage_data={this.props.warehouse_usage_data}/>
                 </Tab>
                 <Tab eventKey="Database" title="Database">
-                    <DatabaseDashboard database_datasize_data={this.props.database_datasize_data}/>
+                    <DatabaseDashboard database_datasize_data={this.props.database_datasize_data} table_active_storage_data={this.props.table_active_storage_data}/>
                 </Tab>
             </Tabs>
         )
