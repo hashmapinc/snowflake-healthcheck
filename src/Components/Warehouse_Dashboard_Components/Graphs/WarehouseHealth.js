@@ -6,18 +6,18 @@ import '../../../main.css'
 class WarehouseHealth extends Component {
 
     render() {
-        var i;
         let health_x_arr = [];
         let health_y_med_execution = [];
         let health_y_overload = [];
         let health_y_provision = [];
 
-        for (i = 0; i < this.props.warehouse_health_data.length; i++) {
-            health_x_arr.push(this.props.warehouse_health_data[i].data.WAREHOUSE);
-            health_y_med_execution.push(this.props.warehouse_health_data[i].data.MEDIAN_EXECUTION_TIME_MINUTES.toFixed(3));
-            health_y_overload.push(this.props.warehouse_health_data[i].data.MEDIAN_QUEUED_OVERLOAD_TIME_MINUTES.toFixed(3));
-            health_y_provision.push(this.props.warehouse_health_data[i].data.MEDIAN_QUEUED_PROVISIONING_TIME_MINUTES.toFixed(3));             
-    };
+        Object.keys(this.props.warehouse_health_data).forEach(entry => {
+            health_x_arr.push(this.props.warehouse_health_data[entry].data.WAREHOUSE); 
+            health_y_med_execution.push(this.props.warehouse_health_data[entry].data.MEDIAN_EXECUTION_TIME_MINUTES.toFixed(3));
+            health_y_overload.push(this.props.warehouse_health_data[entry].data.MEDIAN_QUEUED_OVERLOAD_TIME_MINUTES.toFixed(3));
+            health_y_provision.push(this.props.warehouse_health_data[entry].data.MEDIAN_QUEUED_PROVISIONING_TIME_MINUTES.toFixed(3))
+        }
+    )
 
         const PlotlyComponent = createPlotlyComponent(Plotly);                
             
