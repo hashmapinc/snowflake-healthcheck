@@ -127,7 +127,6 @@ async getLocalCsvData() {
         database_datasize_data: clean_data.filter(x => x.type==="database_usage"),
         table_active_storage_data: clean_data.filter(x => x.type==="table_active_storage"),
       });
-      debugger;
       this.handleModalClose();
     } else {
       this.setState({
