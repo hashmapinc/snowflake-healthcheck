@@ -22,6 +22,7 @@ class App extends Component {
         warehouse_health_data: null,
         warehouse_usage_data: null,
         database_datasize_data: null,
+        table_active_storage_data: null,
         csvHeader: null,
         clipboardButtonText: "Copy to clipboard"
 
@@ -113,6 +114,7 @@ async getLocalCsvData() {
       let clean_data = [];
       try {
         clean_data = updated_data.map(x => JSON.parse(x[0]));
+        console.log(updated_data);
       } catch(error) { 
         console.log("Error ", error);
         console.log("Result ", result);
@@ -123,6 +125,7 @@ async getLocalCsvData() {
         warehouse_health_data: clean_data.filter(x => x.type==="warehouse_health"),
         warehouse_usage_data: clean_data.filter(x => x.type==="warehouse_usage"),
         database_datasize_data: clean_data.filter(x => x.type==="database_usage"),
+        table_active_storage_data: clean_data.filter(x => x.type==="table_active_storage"),
       });
       this.handleModalClose();
     } else {
@@ -155,7 +158,11 @@ async getLocalCsvData() {
         showModal={this.state.showModal}
         clipboardButtonText={this.state.clipboardButtonText}
         handleCopyToClipboard={this.handleCopyToClipboard}/>
-        <GraphTab database_datasize_data={this.state.database_datasize_data} warehouse_health_data={this.state.warehouse_health_data} warehouse_usage_data={this.state.warehouse_usage_data}/>
+        <GraphTab 
+        database_datasize_data={this.state.database_datasize_data} 
+        warehouse_health_data={this.state.warehouse_health_data} 
+        warehouse_usage_data={this.state.warehouse_usage_data}
+        table_active_storage_data={this.state.table_active_storage_data}/>
 
         <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4376150.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -8,19 +8,21 @@ class DatabaseUsage extends Component {
   render() {
       let datasize_traces = []
       let datasize_graph_data = {};
-      let i;
-      for (i = 0; i < this.props.database_datasize_data.length; i++) {
-
-          if (this.props.database_datasize_data[i].data.DATABASE in datasize_graph_data === false) {
-              datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE] = {x: [], y: [], name: this.props.database_datasize_data[i].data.DATABASE, stackgroup: 'one'};
-          }
-          datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE].x.push(this.props.database_datasize_data[i].data.DATE);
-          datasize_graph_data[this.props.database_datasize_data[i].data.DATABASE].y.push(this.props.database_datasize_data[i].data.AVERAGE_DAILY_USAGE_GIGABYTES.toFixed(2));
-      };        
-
-      for (var entry in datasize_graph_data) {
-          datasize_traces.push(datasize_graph_data[entry])
+      
+      Object.keys(this.props.database_datasize_data).forEach(entry => {if (this.props.database_datasize_data[entry].data.DATABASE in datasize_graph_data ===false) {
+        datasize_graph_data[this.props.database_datasize_data[entry].data.DATABASE] = {
+          x: [], 
+          y: [], 
+          name: this.props.database_datasize_data[entry].data.DATABASE, 
+          stackgroup: 'one', 
+          hovertemplate: '%{y} GB',
+        };
       }
+      datasize_graph_data[this.props.database_datasize_data[entry].data.DATABASE].x.push(this.props.database_datasize_data[entry].data.DATE);
+      datasize_graph_data[this.props.database_datasize_data[entry].data.DATABASE].y.push(this.props.database_datasize_data[entry].data.AVERAGE_DAILY_USAGE_GIGABYTES.toFixed(2));
+    })
+
+      Object.keys(datasize_graph_data).forEach(entry => datasize_traces.push(datasize_graph_data[entry]))
 
       const PlotlyComponent = createPlotlyComponent(Plotly);                
 
