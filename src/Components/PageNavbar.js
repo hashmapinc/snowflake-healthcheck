@@ -18,6 +18,7 @@ class PageNavbar extends Component {
                         <h3>Snowflake Healthcheck</h3>
                     </div>
                     <Nav className="ml-auto">
+                        <Nav.Link href="https://www.youtube.com/watch?v=H1HLZ3pkTQA&list=TLPQMTIwMjIwMjGVdYtB_QVhyA&index=6" rel="noopener noreferrer" target="_blank">How-To Video</Nav.Link>
                         <Nav.Link href="https://www.hashmapinc.com/snowflakehealthcheck-reachout" rel="noopener noreferrer" target="_blank">Contact Us</Nav.Link>
                         <Nav.Link href="https://docs.google.com/forms/d/e/1FAIpQLSfdwvdakOH7p9cX0y5OXvXsTajKqg_KzKTrSSEZpssx8LgQ2g/viewform?usp=sf_link" rel="noopener noreferrer" target="_blank">
                             Feedback
