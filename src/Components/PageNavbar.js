@@ -1,10 +1,36 @@
 import React, {Component} from 'react';
 import hashmaplogo from '../hashmap_banner_white.png';
-import {Navbar, Nav} from "react-bootstrap";
+import {Navbar, Nav, NavDropdown} from "react-bootstrap";
 import HealthcheckModal from "./PageNavbar_Components/HealthcheckModal.js";
 import '../main.css'
 
 class PageNavbar extends Component {
+    constructor() {
+        super();
+        this.handleUtlOpen = this.handleUtlOpen.bind(this)
+        this.handleUtlClose = this.handleUtlClose.bind(this)
+        this.handleMoreOpen = this.handleMoreOpen.bind(this)
+        this.handleMoreClose = this.handleMoreClose.bind(this)
+        this.state = { isUltOpen: false,
+                       isMoreOpen: false
+        }
+    }
+
+    handleUtlOpen = () => {
+        this.setState({isUltOpen: true})
+    }
+
+    handleUtlClose = () => {
+        this.setState({isUltOpen: false})
+    }
+
+    handleMoreOpen = () => {
+        this.setState({isMoreOpen: true})
+    }
+
+    handleMoreClose = () => {
+        this.setState({isMoreOpen: false})
+    }
 
     render() {
         return (
@@ -19,13 +45,27 @@ class PageNavbar extends Component {
                     </div>
                     <Nav className="ml-auto">
                         <Nav.Link href="https://www.youtube.com/watch?v=H1HLZ3pkTQA&list=TLPQMTIwMjIwMjGVdYtB_QVhyA&index=6" rel="noopener noreferrer" target="_blank">How-To Video</Nav.Link>
-                        <Nav.Link href="https://www.hashmapinc.com/snowflakehealthcheck-reachout" rel="noopener noreferrer" target="_blank">Contact Us</Nav.Link>
-                        <Nav.Link href="https://docs.google.com/forms/d/e/1FAIpQLSfdwvdakOH7p9cX0y5OXvXsTajKqg_KzKTrSSEZpssx8LgQ2g/viewform?usp=sf_link" rel="noopener noreferrer" target="_blank">
-                            Feedback
-                        </Nav.Link>
-                        <Nav.Link href="https://github.com/hashmapinc/snowflake-healthcheck" rel="noopener noreferrer" target="_blank">
-                            GitHub Repo
-                        </Nav.Link>
+                        <NavDropdown
+                        onMouseEnter = { this.handleUtlOpen }
+                        onMouseLeave = { this.handleUtlClose }
+                        show = { this.state.isUltOpen }
+                        title = "Other Utilities"                        
+                        >
+                            <NavDropdown.Item href="http://snowflakeinspector.hashmapinc.com/" rel="noopener noreferrer" target="_blank">Snowflake Inspector</NavDropdown.Item>
+                            <NavDropdown.Item href="https://profiler.snowflakeinspector.com/" rel="noopener noreferrer" target="_blank">Snowflake Data Profiler</NavDropdown.Item>
+                            <NavDropdown.Item href="https://estimator.snowflakeinspector.com/" rel="noopener noreferrer" target="_blank">Snowflake Estimator</NavDropdown.Item>
+                        </NavDropdown>
+                        <NavDropdown
+                        onMouseEnter = { this.handleMoreOpen }
+                        onMouseLeave = { this.handleMoreClose }
+                        show = { this.state.isMoreOpen }
+                        title = "More Info"                        
+                        >
+                            <NavDropdown.Item href="https://www.hashmapinc.com/snowflake-utilities-accelerators" rel="noopener noreferrer" target="_blank">Other Accelerators</NavDropdown.Item>
+                            <NavDropdown.Item href="https://github.com/hashmapinc/snowflake-healthcheck" rel="noopener noreferrer" target="_blank">GitHub Repo</NavDropdown.Item>
+                            <NavDropdown.Item href="https://docs.google.com/forms/d/e/1FAIpQLSfdwvdakOH7p9cX0y5OXvXsTajKqg_KzKTrSSEZpssx8LgQ2g/viewform?usp=sf_link" rel="noopener noreferrer" target="_blank">Feedback</NavDropdown.Item>
+                            <NavDropdown.Item href="https://www.hashmapinc.com/snowflakehealthcheck-reachout" rel="noopener noreferrer" target="_blank">Contact Us</NavDropdown.Item>
+                        </NavDropdown>
                         <HealthcheckModal 
                         file_name={this.props.file_name}
                         handleSubmit={this.props.handleSubmit} 
