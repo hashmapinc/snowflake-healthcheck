@@ -34,7 +34,7 @@ class HubspotForm extends React.Component {
       // if the form is submitted, add a cookie to allow user to content page
       window.addEventListener('message', EventTarget => {
         if (EventTarget.data.type === 'hsFormCallback' && EventTarget.data.eventName === 'onFormSubmitted') {
-          Cookies.set('_hs_form_submitted', md5("hubspot form submitted"), {path: '/'})
+          Cookies.set('_hs_form_submitted', md5("hubspot form submitted"), {expires: 365, path: '/'})
         }
       })
 
