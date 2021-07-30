@@ -58,7 +58,9 @@ class DatabaseUsage extends Component {
         "xaxis": { 
           "automargin": true, 
           "showgrid": false 
-        }
+        },
+        paper_bgcolor: 'rgb(256, 250, 245)',
+        plot_bgcolor: 'rgb(254, 247, 234)'  
       };
       let useResizeHandler = true;
       let style = {"width": "100%", "height": "100%"};

@@ -20,11 +20,23 @@ class TableActiveStorage extends Component {
     }
   }
   render() {
-      let table_storage_traces = [];
+     
 
-      Object.keys(this.props.table_active_storage_data).forEach(entry => table_storage_traces.push(this.makeTrace(this.props.table_active_storage_data[entry])));
+      // Object.keys(this.props.table_active_storage_data).forEach(entry => table_storage_traces.push(this.makeTrace(this.props.table_active_storage_data[entry])));
 
       const PlotlyComponent = createPlotlyComponent(Plotly);                
+
+      let table_storage_traces = {
+        type: 'bar',
+        x: this.props.table_active_storage_data.map(entry => entry.data.DATABASE_NAME+'-'+entry.data.TABLE_NAME),
+        y: this.props.table_active_storage_data.map(entry => entry.data.ACTIVE_STORAGE_GIGABYTES),
+        text: this.props.table_active_storage_data.map(entry => entry.data.ACTIVE_STORAGE_GIGABYTES.toFixed(3)),
+        textposition: "outside",
+        marker: {
+          color: 'hex(#2CA02C)',
+        }
+      };
+
 
       let layout = {
         "title": 'Active Storage Usage by Table - in Gigabytes',
@@ -56,13 +68,15 @@ class TableActiveStorage extends Component {
         "xaxis": { 
           "automargin": true, 
           "showgrid": false 
-        }
+        },      
+        paper_bgcolor: 'rgb(256, 250, 245)',
+        plot_bgcolor: 'rgb(254, 247, 234)'  
       };
       let useResizeHandler = true;
       let style = {"width": "100%", "height": "100%"};
 
       return (
-          <PlotlyComponent data={table_storage_traces} layout={layout} useResizeHandler={useResizeHandler} style={style}/>
+          <PlotlyComponent data={[table_storage_traces]} layout={layout} useResizeHandler={useResizeHandler} style={style}/>
       );
   }
 }
