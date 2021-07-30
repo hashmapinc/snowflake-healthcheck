@@ -60,7 +60,6 @@ class LeastAccessedObjects extends Component {
         gridwidth: 2
       },
       bargap :0.05,
-      showlegend: false,
       height: 700,
       width: 700, 
       margin: {

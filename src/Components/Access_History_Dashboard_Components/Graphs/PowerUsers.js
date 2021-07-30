@@ -43,17 +43,12 @@ class PowerUsers extends Component {
         showgrid: false,
         showline: true,
         linecolor: 'rgb(102, 102, 102)',
-        "title": 'Distinct Queries Fired', 
-        "titlefont": { 
+        title : 'Distinct Queries Fired', 
+        titlefont: { 
           "size": 12, 
           "color": "black" 
         }, 
        "automargin": true,
-        titlefont: {
-          font: {
-            color: 'rgb(204, 204, 204)'
-          }
-        },
         tickfont: {
           font: {
             color: 'rgb(102, 142, 102)'
