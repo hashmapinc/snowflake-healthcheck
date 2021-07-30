@@ -83,7 +83,9 @@ class WarehouseHealth extends Component {
                 "showgrid": false, 
                 "showline": true
             }, 
-            "hovermode": "closest", 
+            "hovermode": "closest",
+            paper_bgcolor: 'rgb(256, 250, 245)',
+            plot_bgcolor: 'rgb(254, 247, 234)', 
             "xaxis": {
                 "automargin": true
             }
