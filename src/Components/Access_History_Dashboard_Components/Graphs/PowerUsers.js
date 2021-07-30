@@ -18,8 +18,8 @@ class PowerUsers extends Component {
 
     var trace1 = {
       type: 'scatter',
-      x: distinct_queries_count,
-      y: unique_users,
+      y: distinct_queries_count,
+      x: unique_users,
       mode: 'markers',
       name: 'Number of distinct queries fired',
       marker: {
@@ -40,22 +40,23 @@ class PowerUsers extends Component {
         yanchor: 'top'         
       },
       xaxis: {
-        showgrid: false,
+        showgrid: true,
         showline: true,
         linecolor: 'rgb(102, 102, 102)',
-        title : 'Distinct Queries Fired', 
+        title : 'Users', 
         titlefont: { 
           "size": 12, 
           "color": "black" 
         }, 
        "automargin": true,
+       tickangle: -45,
         tickfont: {
           font: {
             color: 'rgb(102, 142, 102)'
           }
         },
         yaxis: {
-          "title": 'Users', 
+          "title": 'Distinct Queries Fired', 
           "titlefont": { 
             "size": 12, 
             "color": "black" 

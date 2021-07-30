@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   fetchLocalCsv() {
-    return fetch('/data/default_data_v3.csv', {
+    return fetch('/data/default_data.csv', {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
