@@ -1,7 +1,6 @@
 -- Set execution context
 -- Also select the warehouse you want to use for this. An X-SMALL is just fine for most people.
-USE ROLE RTE;
-USE WAREHOUSE RTE_WH;
+USE ROLE ACCOUNTADMIN;
 USE DATABASE SNOWFLAKE;
 USE SCHEMA ACCOUNT_USAGE; 
 
