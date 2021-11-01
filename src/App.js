@@ -155,7 +155,6 @@ class App extends Component {
   render() {
     // checks to see if the user consented to cookies and also successfully submitted the form
     // conditionally shows main page content or the hubspot form
-    //DAH: PUT THIS BACK IN ONCE HUBSPOT FIXES THE SCRIPT ISSUE WITH CSP.
     if (this.state.formSubmitCookie && this.state.cookieConsent) {
       return (
         <div className="container">
