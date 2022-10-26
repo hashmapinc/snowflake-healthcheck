@@ -1,73 +1,141 @@
 import React, {Component} from 'react';
-import Plotly from 'plotly.js-basic-dist-min';
-import createPlotlyComponent from 'react-plotly.js/factory';
+// install (please make sure versions match peerDependencies)
+// yarn add @nivo/core @nivo/line
+import {ResponsiveLine} from '@nivo/line'
 import '../../../main.css'
 
 class DatabaseUsage extends Component {
   
   render() {
-      let datasize_traces = []
-      let datasize_graph_data = {};
-      
-      Object.keys(this.props.database_datasize_data).forEach(entry => {if (this.props.database_datasize_data[entry].data.DATABASE in datasize_graph_data ===false) {
-        datasize_graph_data[this.props.database_datasize_data[entry].data.DATABASE] = {
-          x: [], 
-          y: [], 
-          name: this.props.database_datasize_data[entry].data.DATABASE, 
-          stackgroup: 'one', 
-          hovertemplate: '%{y} GB',
-        };
-      }
-      datasize_graph_data[this.props.database_datasize_data[entry].data.DATABASE].x.push(this.props.database_datasize_data[entry].data.DATE);
-      datasize_graph_data[this.props.database_datasize_data[entry].data.DATABASE].y.push(this.props.database_datasize_data[entry].data.AVERAGE_DAILY_USAGE_GIGABYTES.toFixed(2));
-    })
+    const styles = {
+      fontFamily: "sans-serif",
+      textAlign: "center"
+    };
+  
+    const databases = new Map();
+    const my_data = [];
+    let data_container = this.props.database_datasize_data;
+    
+    for(let entry in data_container) {
+        let db = data_container[entry]["data"]["DATABASE"];
+        if(!databases.get(db)) {
+            databases.set(db,my_data.length);
+            my_data.push({"id": db, "data": []});
+        }   
+        my_data[databases.get(db)]["data"].push({
+            "x": data_container[entry]["data"]["DATE"],
+            "y": data_container[entry]["data"]["AVERAGE_DAILY_USAGE_GIGABYTES"],
+            "z": data_container[entry]["data"]["DATABASE"]
+        });
+        
+    }
 
-      Object.keys(datasize_graph_data).forEach(entry => datasize_traces.push(datasize_graph_data[entry]))
 
-      const PlotlyComponent = createPlotlyComponent(Plotly);                
+    // make sure parent container have a defined height when using
+    // responsive component, otherwise height will be 0 and
+    // no chart will be rendered.
+    // website examples showcase many properties,
+    // you'll often use just a few of them.
+    const MyLine = () => (
+      <div id='database-usage-container'>
+        <div id='database-usage' style={styles}>
+            <h2>Daily Gigabyte Usage by Database - Last 30 Days</h2>
+            <div style={{height: 450}}>
+                <ResponsiveLine data={my_data}
+                margin={{ top: 50, right: 110, bottom: 100, left: 60 }}
+                xScale={{
+                    type: 'time',
+                    format: '%Y-%m-%d',
+                    useUTC: false,
+                    precision: 'day',
+                }}
+                xFormat="time:%Y-%m-%d"
+                yScale={{ type: 'linear', min: 0, max: 'auto' }}
+                yFormat=">-.2f"
+                blendMode="multiply"
+                axisTop={null}
+                axisRight={null}
+                axisBottom={{
+                    format: '%b %d',
+                    orient: 'bottom',
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: -15,
+                    legend: 'Database Name',
+                    legendOffset: 60,
+                    legendPosition: 'middle'
+                }}
+                axisLeft={{
+                    orient: 'left',
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'Gigabytes',
+                    legendOffset: -50,
+                    legendPosition: 'middle'
+                }}
+                enablePointLabel={true}
+                pointSize={16}
+                pointBorderWidth={1}
+                pointBorderColor={{
+                    from: 'color',
+                    modifiers: [['darker', 0.3]],
+                }}
+                legends={[
+                    {
+                        anchor: 'bottom-right',
+                        direction: 'column',
+                        justify: false,
+                        translateX: 130,
+                        translateY: 0,
+                        itemWidth: 100,
+                        itemHeight: 12,
+                        itemsSpacing: 5,
+                        itemDirection: 'left-to-right',
+                        symbolSize: 12,
+                        symbolShape: 'circle',
+                        toggleSerie: true,
+                        effects: [
+                            {
+                                on: 'hover',
+                                style: {
+                                    itemOpacity: 1
+                                }
+                            }
+                        ]
+                    }
+                ]}
+                useMesh={true}
+                enableSlices="x"
+                sliceTooltip={({ slice }) => {
+                    return (
+                        <div
+                            style={{
+                                background: 'white',
+                                padding: '9px 12px',
+                                border: '1px solid #ccc',
+                            }}
+                        >
+                            {slice.points.map(point => (
+                                <div
+                                    key={point.id}
+                                    style={{
+                                        color: point.serieColor,
+                                        padding: '3px 0',
+                                    }}
+                                >
+                                    <strong>Database: {point.data.z}<br/>Usage: {point.data.yFormatted} Gigabytes<br/>Date: {point.data.xFormatted}</strong>
+                                </div>
+                            ))}
+                        </div>
+                    )
+                }}/>
+                    </div>
+                </div>
+              </div>
+    )
 
-      let layout = {
-        "title": 'Daily Gigabyte Usage by Database - Last 30 Days', 
-        "autosize": true, 
-        "titlefont": { 
-          "size": 16, 
-          "color": "black" 
-        }, 
-        "font": { 
-          "size": 8, 
-          "color": "black" 
-        }, 
-        "legend": { 
-          "orientation": "h",
-          "y": -.1 
-        }, 
-        "yaxis": {
-          "title": 'Gigabytes', 
-          "titlefont": { 
-            "size": 12, 
-            "color": "black" 
-          }, 
-          "automargin": true, 
-          "showgrid": false, 
-          "showline": true
-        }, 
-        "hovermode": "closest", 
-        "hoverlabel": { 
-          "namelength": -1 
-        }, 
-        "xaxis": { 
-          "automargin": true, 
-          "showgrid": false 
-        },
-        paper_bgcolor: 'rgb(256, 250, 245)',
-        plot_bgcolor: 'rgb(254, 247, 234)'  
-      };
-      let useResizeHandler = true;
-      let style = {"width": "100%", "height": "100%"};
-
-      return (
-          <PlotlyComponent data={datasize_traces} layout={layout} useResizeHandler={useResizeHandler} style={style}/>
-      );
+      return (<MyLine/>);
   }
 }
 

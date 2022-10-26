@@ -155,8 +155,7 @@ class App extends Component {
   render() {
     // checks to see if the user consented to cookies and also successfully submitted the form
     // conditionally shows main page content or the hubspot form
-    if (this.state.formSubmitCookie && this.state.cookieConsent) {
-      return (
+    return (
         <div className="container">
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes" />
@@ -198,18 +197,7 @@ class App extends Component {
             crossOrigin="anonymous"></script>
         </div>
       )
-    } else {
-      return (
-        <Container fluid>
-          <HubspotFormNavbar />
-          <HubspotForm />
-          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossOrigin="anonymous"></script>
-        </Container>
-      )
     }
-  }
 
 }
 

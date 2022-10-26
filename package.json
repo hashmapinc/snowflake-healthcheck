@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nivo/bar": "^0.79.1",
+    "@nivo/core": "^0.79.0",
+    "@nivo/line": "^0.79.1",
+    "@nivo/scatterplot": "^0.79.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -16,10 +20,11 @@
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-plotly.js": "^2.5.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "yarn": "^1.22.18"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts --openssl-legacy-provider build",
     "deploy": "aws s3 sync build/ s3://react-test-healthcheck --acl public-read",
     "test": "react-scripts test",
