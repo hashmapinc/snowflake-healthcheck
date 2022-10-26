@@ -1,83 +1,91 @@
 import React, {Component} from 'react';
-import Plotly from 'plotly.js-basic-dist-min';
-import createPlotlyComponent from 'react-plotly.js/factory';
+// install (please make sure versions match peerDependencies)
+// yarn add @nivo/core @nivo/bar
+import { ResponsiveBar } from '@nivo/bar'
 import '../../../main.css'
 
 class TableActiveStorage extends Component {
-  constructor() {
-    super();
-    this.makeTrace = this.makeTrace.bind(this);
-  }
-  
-  makeTrace(graph_data) {
-    return {
-      x: [graph_data.data.DATABASE_NAME],
-      y: [graph_data.data.ACTIVE_STORAGE_GIGABYTES.toFixed(2)],
-      name: graph_data.data.TABLE_NAME,
-      type: 'bar',
-      mode:'markers',
-      hovertemplate: '%{y} GB'
-    }
-  }
+
   render() {
+
+
+      const styles = {
+        fontFamily: "sans-serif",
+        textAlign: "center"
+      };
+
+
+      const my_data = []
+      let data_container = this.props.table_active_storage_data;
+      let ctr = 0;
+
+      for(let entry in data_container) {
+        if(ctr > -1) {
+          let info = data_container[entry]["data"];
+          my_data.push({"Database": info["DATABASE_NAME"]+"_"+info["TABLE_NAME"],
+          "Gigabytes": info["ACTIVE_STORAGE_GIGABYTES"]});
+        }
+        ctr++;
+      }
      
 
-      // Object.keys(this.props.table_active_storage_data).forEach(entry => table_storage_traces.push(this.makeTrace(this.props.table_active_storage_data[entry])));
-
-      const PlotlyComponent = createPlotlyComponent(Plotly);                
-
-      let table_storage_traces = {
-        type: 'bar',
-        x: this.props.table_active_storage_data.map(entry => entry.data.DATABASE_NAME+'-'+entry.data.TABLE_NAME),
-        y: this.props.table_active_storage_data.map(entry => entry.data.ACTIVE_STORAGE_GIGABYTES),
-        text: this.props.table_active_storage_data.map(entry => entry.data.ACTIVE_STORAGE_GIGABYTES.toFixed(3)),
-        textposition: "outside",
-        marker: {
-          color: 'hex(#2CA02C)',
-        }
-      };
-
-
-      let layout = {
-        "title": 'Active Storage Usage by Table - in Gigabytes',
-        "barmode": "stack",
-        "autosize": true, 
-        "titlefont": { 
-          "size": 16, 
-          "color": "black" 
-        }, 
-        "font": { 
-          "size": 8, 
-          "color": "black" 
-        }, 
-        "showlegend": false,
-        "hovermode": "closest",
-        "hoverlabel": { 
-          "namelength": -1 
-        }, 
-        "yaxis": {
-          "title": 'Gigabytes', 
-          "titlefont": { 
-            "size": 12, 
-            "color": "black" 
-          }, 
-          "automargin": true, 
-          "showgrid": false, 
-          "showline": true
-        }, 
-        "xaxis": { 
-          "automargin": true, 
-          "showgrid": false 
-        },      
-        paper_bgcolor: 'rgb(256, 250, 245)',
-        plot_bgcolor: 'rgb(254, 247, 234)'  
-      };
-      let useResizeHandler = true;
-      let style = {"width": "100%", "height": "100%"};
-
-      return (
-          <PlotlyComponent data={[table_storage_traces]} layout={layout} useResizeHandler={useResizeHandler} style={style}/>
-      );
+      const MyResponsiveBar = () => (
+        <div id='table-active-storage-container'>
+            <div id='table-active-storage' style={styles}>
+                <h2>Active Storage Usage by Table - In Gigabytes</h2>
+                <div style={{height: 450}}>
+                    <ResponsiveBar data={my_data} keys={["Gigabytes"]} indexBy="Database"
+                      margin={{ top: 50, right: 130, bottom: 100, left: 120 }}
+                      padding={0.3}
+                      valueScale={{ type: 'linear' }}
+                      indexScale={{ type: 'band', round: true }}
+                      colors={{ scheme: 'nivo' }}
+                      labelFormat={{}}
+                        axisBottom={{
+                            tickSize: 5,
+                            tickPadding: 5,
+                            tickRotation: -15,
+                            legend: 'Object Name',
+                            legendPosition: 'middle',
+                            legendOffset: 90
+                        }}
+                        axisLeft={{
+                            tickSize: 5,
+                            tickPadding: 5,
+                            tickRotation: 0,
+                            legend: 'Gigabytes',
+                            legendPosition: 'middle',
+                            legendOffset: -50
+                        }}
+                        valueFormat={value =>
+                          <tspan y="-5">{Number(value).toLocaleString('us-US', {
+                              minimumFractionDigits: 1,
+                              maximumSignificantDigits: 4
+                          })}</tspan>
+                      }
+                        tooltip={({id, indexValue, value}) => (
+                            <div
+                                style={{
+                                    padding: 12,
+                                    fontSize: 12,
+                                    color: '#999999',
+                                    background: '#222222',
+                                }}
+                            >
+                                <strong>
+                                    Table: {indexValue}<br></br>
+                                    {id}: {`${Number(value).toLocaleString('us-US', {
+                                      minimumFractionDigits: 1,
+                                      maximumSignificantDigits: 4
+                                    })}`}
+                                </strong>
+                            </div>
+                        )}/>
+                </div>
+            </div> 
+        </div>
+    )
+          return (<MyResponsiveBar/>);
   }
 }
 

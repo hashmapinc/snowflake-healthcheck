@@ -5,7 +5,6 @@ import PowerUsers from './Access_History_Dashboard_Components/Graphs/PowerUsers.
 import '../main.css'
 
 class AccessHistoryDashboard extends Component {
-
     render() {
         // if (this.props.database_datasize_data) {
 

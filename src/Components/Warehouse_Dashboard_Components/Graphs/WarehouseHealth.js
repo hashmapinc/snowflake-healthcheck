@@ -1,103 +1,110 @@
 import React, {Component} from 'react';
-import Plotly from 'plotly.js-basic-dist-min';
-import createPlotlyComponent from 'react-plotly.js/factory';
-import '../../../main.css'
+import { ResponsiveBar } from '@nivo/bar';
+import '../../../main.css';
 
 class WarehouseHealth extends Component {
 
     render() {
-        let health_x_arr = [];
-        let health_y_med_execution = [];
-        let health_y_overload = [];
-        let health_y_provision = [];
+        
+        const styles = {
+            fontFamily: "sans-serif",
+            textAlign: "center"
+        };
+    
 
-        Object.keys(this.props.warehouse_health_data).forEach(entry => {
-            health_x_arr.push(this.props.warehouse_health_data[entry].data.WAREHOUSE); 
-            health_y_med_execution.push(this.props.warehouse_health_data[entry].data.MEDIAN_EXECUTION_TIME_MINUTES.toFixed(3));
-            health_y_overload.push(this.props.warehouse_health_data[entry].data.MEDIAN_QUEUED_OVERLOAD_TIME_MINUTES.toFixed(3));
-            health_y_provision.push(this.props.warehouse_health_data[entry].data.MEDIAN_QUEUED_PROVISIONING_TIME_MINUTES.toFixed(3))
+        let my_data = [];
+
+        let data_container = this.props.warehouse_health_data;
+
+        for(let entry in data_container) {
+            my_data.push({"Median Execution Time": data_container[entry]["data"]["MEDIAN_EXECUTION_TIME_MINUTES"].toFixed(3),
+            "Median Queued Provisioning Time": data_container[entry]["data"]["MEDIAN_QUEUED_PROVISIONING_TIME_MINUTES"].toFixed(3),
+            "Median Queued Overload Time": data_container[entry]["data"]["MEDIAN_QUEUED_OVERLOAD_TIME_MINUTES"].toFixed(3),
+            "Warehouse": data_container[entry]["data"]["WAREHOUSE"]});
         }
-    )
 
-        const PlotlyComponent = createPlotlyComponent(Plotly);                
-            
-            var trace_execution = {
-            x: health_x_arr,
-            y: health_y_med_execution,
-            type: 'bar',
-            textposition: 'auto',
-            hovertemplate: '%{y} minutes<extra></extra>',
-            name: 'Median Execution Time',
-            marker: {
-                color: 'hex(#1F77B4)',
-            }
-            };
-            
-            var trace_overload = {
-            x: health_x_arr,
-            y: health_y_overload,
-            type: 'bar',
-            textposition: 'auto',
-            hovertemplate: '%{y} minutes<extra></extra>',
-            name: "Median Queued Overload Time",
-            marker: {
-                color: 'hex(#FF7F0E)',
-            }
-            };
-
-            var trace_provision = {
-            x: health_x_arr,
-            y: health_y_provision,
-            type: 'bar',
-            textposition: 'auto',
-            hovertemplate: '%{y} minutes<extra></extra>',
-            name: 'Median Queued Provisioning Time',
-            marker: {
-                color: 'hex(#2CA02C)',
-            }
-            };
-        
-        let data = [trace_execution, trace_provision, trace_overload];
-        let layout = {
-            "title": 'Warehouse Health - Last 30 Days', 
-            "autosize": true, 
-            "titlefont": {
-                "size": 16, 
-                "color":"black"
-            }, 
-            "font": {
-                "size": 8, 
-                "color":"black"
-            }, 
-            "legend": {
-                "x": 1, 
-                "y": 0.5
-            }, 
-            "yaxis": {
-                "title": 'Median Minutes', 
-                "titlefont": {
-                    "size": 12, 
-                    "color": 'black'
-                }, 
-                "automargin": true, 
-                "showgrid": false, 
-                "showline": true
-            }, 
-            "hovermode": "closest",
-            paper_bgcolor: 'rgb(256, 250, 245)',
-            plot_bgcolor: 'rgb(254, 247, 234)', 
-            "xaxis": {
-                "automargin": true
-            }
-        }
-        let useResizeHandler = true;
-        let style = {width: "100%", height: "100%", marginBottom: "10px"};
-
-        
-        
-        return (
-            <PlotlyComponent data={data} layout={layout} useResizeHandler={useResizeHandler} style={style}/>
-        );
+        const MyResponsiveBar = () => (
+            <div id='myman'>
+                <div style={styles}>
+                    <h2>Warehouse - Last 30 Days</h2>
+                    <div style={{height: 400}}>
+                        <ResponsiveBar data={my_data} keys={["Median Execution Time",
+                            "Median Queued Provisioning Time",
+                            "Median Queued Overload Time"]}
+                            indexBy="Warehouse"
+                            groupMode='grouped'
+                            margin={{ top: 50, right: 202, bottom: 100, left: 60 }}
+                            axisBottom={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: -15,
+                                legend: 'Warehouse',
+                                legendPosition: 'middle',
+                                legendOffset: 90
+                            }}
+                            axisLeft={{
+                                tickSize: 5,
+                                tickPadding: 5,
+                                tickRotation: 0,
+                                legend: 'Median Minutes',
+                                legendPosition: 'middle',
+                                legendOffset: -50
+                            }}
+                            //initialHiddenIds={keys.slice(2, 4)}
+                            legends={[
+                                {
+                                    dataFrom: 'keys',
+                                    anchor: 'bottom-right',
+                                    direction: 'column',
+                                    justify: false,
+                                    translateX: 120,
+                                    translateY: 0,
+                                    itemsSpacing: 2,
+                                    itemWidth: 110,
+                                    itemHeight: 20,
+                                    itemDirection: 'left-to-right',
+                                    itemOpacity: 0.85,
+                                    symbolSize: 15,
+                                    toggleSerie: true,
+                                    effects: [
+                                        {
+                                            on: 'hover',
+                                            style: {
+                                                itemOpacity: 1
+                                            }
+                                        }
+                                    ],
+                                }
+                            ]}
+                            valueFormat={value =>
+                                <tspan y="-5">{Number(value).toLocaleString('us-US', {
+                                    minimumFractionDigits: 1,
+                                    maximumSignificantDigits: 4
+                                })}</tspan>
+                            }
+                            tooltip={({id,indexValue, value}) => (
+                                <div
+                                    style={{
+                                        padding: 12,
+                                        fontSize: 12,
+                                        color: '#999999',
+                                        background: '#222222',
+                                    }}
+                                >
+                                    <strong>
+                                        Warehouse: {indexValue}<br></br>
+                                        {id}: {`${Number(value).toLocaleString('us-US', {
+                                  minimumFractionDigits: 1,
+                                  maximumSignificantDigits: 4
+                                    })} minutes`}
+                                    </strong>
+                                </div>
+                            )}/>
+                    </div>
+                </div> 
+            </div>
+        )
+            return (<MyResponsiveBar/>);
     }
 }
 
